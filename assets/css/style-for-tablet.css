@@ -1,0 +1,9 @@
+/* Responsive layout - For Medium Size Devices */
+@media screen and (max-width: 800px) {
+    /* ------------Home Page Photo Grid  --------------  */
+    .column {
+      -ms-flex: 50%;
+      flex: 50%;
+      max-width: 50%;
+    }
+}

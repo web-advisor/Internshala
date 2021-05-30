@@ -11,19 +11,23 @@
     <meta name="description" content="Order food online from restaurants and get it delivered. ">
 
     <!-- Logo -->
-    <link rel="icon" href="assets/images/logo/logo.jpeg">
+    <link rel="icon" href="assets/images/logo/logo.png">
+    <!-- <link rel="icon" href="assets/images/logo/logo.jpg">
+    <link rel="icon" href="assets/images/logo/logo.svg">
+    <link rel="icon" href="assets/images/logo/logo.gif"> -->
 
     <!-- Title -->
     <title>foodshala</title>
 
     <!-- stylesheets -->
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css" version="1.0">
 
-    </head>
+</head>
 
-    <body>
+<body>
 
     <div id="load">
         <img src="assets/images/loading.gif" alt="Loading...">
