@@ -7,3 +7,9 @@
       max-width: 50%;
     }
 }
+
+@media screen and (max-width:790px){
+  #address-div .submit-button{
+      top:360px;
+  }
+}

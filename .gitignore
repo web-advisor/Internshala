@@ -1,1 +1,5 @@
 *.pdf
+.vagrant
+/control/vendor
+composer.json
+composer.lock

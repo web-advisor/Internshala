@@ -7,3 +7,22 @@
       max-width: 100%;
     }
   }
+
+  @media screen and (max-width:576px){
+    #address-div .submit-button{
+        top:460px;
+    }
+    .profile-input{
+        top:240px;
+        width:50vw;
+    }
+    
+    .settings{
+        width:14vw;
+        height: 14vw;
+        position: fixed;
+        right:10px;
+        bottom: 10px;
+    }
+
+}

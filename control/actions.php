@@ -8,11 +8,7 @@ if ($_GET["process"] == "type" && isset($_POST["type"])) {
     $_SESSION["type"] = $_POST["type"];
     unset($_POST["type"]);
     echo 1;
-} else {
-    echo 0;
-}
-
-
+} 
 
 
 // ------------------------ Sign Up Action ---------------------------
@@ -102,6 +98,125 @@ if ($_GET["process"] == "login") {
     }
 
     if ($error != "") {
+        echo $error;
+        exit();
+    }
+}
+
+// ---------------------------------------------------------- Profile Set Up ---------------------------------------::
+if($_GET["process"]=="profile-setup"){    
+    // Managing Prsnl Info ::
+    $type=$_SESSION["type"];
+    $relation=substr($type,0,4)."_";
+
+    if($type=="customers"){
+        $existCheck="SELECT `".$relation."id` FROM `".$relation."details` WHERE `".$relation."id` = '".mysqli_real_escape_string($link,$_SESSION['id'])."' LIMIT 1";
+        $resultEC=mysqli_query($link,$existCheck);
+        if($resultEC && mysqli_num_rows($resultEC)>0){
+            $updatingInfo="UPDATE `".$relation."details`
+                SET `name`='".mysqli_real_escape_string($link,$_POST['name'])."',
+                    `phone`='".mysqli_real_escape_string($link,$_POST['phone'])."',
+                    `preferences`='".mysqli_real_escape_string($link,$_POST['preferences'])."'
+                WHERE `".$relation."id`='".mysqli_real_escape_string($link,$_SESSION['id'])."'";
+            $resultInfo=mysqli_query($link,$updatingInfo);
+            echo "1"; 
+        }else{
+            $insertingInfo="INSERT into `".$relation."details` (`".$relation."id`,`name`,`phone`,`preferences`) 
+            VALUES ('".mysqli_real_escape_string($link,$_SESSION['id'])."',
+                    '".mysqli_real_escape_string($link,$_POST['name'])."',
+                    '".mysqli_real_escape_string($link,$_POST['phone'])."',
+                    '".mysqli_real_escape_string($link,$_POST['preferences'])."')";
+            $resultInfo=mysqli_query($link,$insertingInfo);
+            echo "1";             
+        }
+    }else if($type=="restaurant"){
+        $existCheck="SELECT `".$relation."id` FROM `".$relation."details` WHERE `".$relation."id` = '".mysqli_real_escape_string($link,$_SESSION['id'])."' LIMIT 1";
+        $resultEC=mysqli_query($link,$existCheck);
+        if($resultEC && mysqli_num_rows($resultEC)>0){
+            $updatingInfo="UPDATE `".$relation."details`
+                SET `name`='".mysqli_real_escape_string($link,$_POST['name'])."',
+                    `phone`='".mysqli_real_escape_string($link,$_POST['phone'])."',
+                    `website`='".mysqli_real_escape_string($link,$_POST['website'])."',
+                    `rating`='".mysqli_real_escape_string($link,$_POST['rating'])."',
+                    `image`='".mysqli_real_escape_string($link,$_FILES['restaurant_photos']['name'])."'
+                WHERE `".$relation."id`='".mysqli_real_escape_string($link,$_SESSION['id'])."'";
+            $resultInfo=mysqli_query($link,$updatingInfo);
+            // $error.=mysqli_error($link);
+            echo "1"; 
+        }else{
+            $insertingInfo="INSERT into `".$relation."details` (`".$relation."id`,`name`,`phone`,`website`,`rating`,`image`) 
+            VALUES ('".mysqli_real_escape_string($link,$_SESSION['id'])."',
+                    '".mysqli_real_escape_string($link,$_POST['name'])."',
+                    '".mysqli_real_escape_string($link,$_POST['phone'])."',
+                    '".mysqli_real_escape_string($link,$_POST['website'])."',
+                    '".mysqli_real_escape_string($link,$_POST['rating'])."',
+                    '".mysqli_real_escape_string($link,$_FILES['restaurant_photos']['name'])."')";
+            $resultInfo=mysqli_query($link,$insertingInfo);
+            // $error.=mysqli_error($link);
+            echo "1";             
+        }
+
+        if($resultInfo && isset($_POST['name']) && isset($_FILES['restaurant_photos']['name'])){
+            # Username
+            $username = $_POST['name'];  
+            str_replace(" ","_",$username);     
+            # Get file name
+            $filename = $_FILES['restaurant_photos']['name'];
+            # Get File size
+            $filesize = $_FILES['restaurant_photos']['size'];
+            # Location
+            $location = "../assets/images/restaurant/".$username;
+            # create directory if not exists at location
+            if(!is_dir($location)){
+              mkdir($location, 0755);
+            }       
+            $location .= "/".$filename;      
+            # Upload file
+            if(move_uploaded_file($_FILES['restaurant_photos']['tmp_name'],$location)){
+                echo "1";
+            }
+         }
+    }
+
+    // Address Geocoding :: 
+    require "vendor/autoload.php";
+    
+    $geocoder = new \OpenCage\Geocoder\Geocoder($key);
+    $result = $geocoder->geocode($_POST["line"] .','.$_POST["city"] .','.$_POST["state"].','.$_POST["pin"]);
+    if ($result['total_results'] > 0) {
+        $first = $result['results'][0];
+        # print $first['geometry']['lng'] . ';' . $first['geometry']['lat'] . ';' .$_SESSION['id'] ."\n";
+        # 4.360081;43.8316276;6 Rue Massillon, 30020 Nîmes, Frankreich
+
+        $existAdd="SELECT `".$relation."id` FROM `".$relation."address` WHERE `".$relation."id` = '".mysqli_real_escape_string($link,$_SESSION['id'])."' LIMIT 1";
+        $resultAdd=mysqli_query($link,$existAdd);
+        if($resultAdd && mysqli_num_rows($resultAdd)>0){    
+            $updatingLatLng="UPDATE `".$relation."address` 
+            SET `line`='".mysqli_real_escape_string($link,$_POST['line'])."',
+                `city`='".mysqli_real_escape_string($link,$_POST['city'])."',
+                `state`='".mysqli_real_escape_string($link,$_POST['state'])."',
+                `pin`='".mysqli_real_escape_string($link,$_POST['pin'])."',
+                `lat`='".mysqli_real_escape_string($link,$first['geometry']['lat'])."',
+                `lng`='".mysqli_real_escape_string($link,$first['geometry']['lng'])."'
+            WHERE `".$relation."id`=".$_SESSION['id'];
+            $resultLatLng=mysqli_query($link,$updatingLatLng);
+            echo "1"; 
+        }else{
+            $insertingLatLng="INSERT into `".$relation."address` (`".$relation."id`,`line`,`city`,`state`,`pin`,`lat`,`lng`) 
+            VALUES ('".mysqli_real_escape_string($link,$_SESSION['id'])."',
+                    '".mysqli_real_escape_string($link,$_POST['line'])."',
+                    '".mysqli_real_escape_string($link,$_POST['city'])."',
+                    '".mysqli_real_escape_string($link,$_POST['state'])."',
+                    '".mysqli_real_escape_string($link,$_POST['pin'])."',
+                    '".mysqli_real_escape_string($link,$first['geometry']['lat'])."',
+                    '".mysqli_real_escape_string($link,$first['geometry']['lng'])."')";
+            $resultLatLng=mysqli_query($link,$insertingLatLng);
+            echo "1";          
+        }
+    }else{
+        $error.="Couldn't Access Location Info - Please try again later ";
+    }    
+    if($error!=""){
         echo $error;
         exit();
     }
