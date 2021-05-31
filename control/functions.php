@@ -10,5 +10,4 @@
     if(isset($_GET['process']) && $_GET['process']=="logout"){
             session_unset();
     }
-
-?>
+    

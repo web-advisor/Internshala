@@ -5,6 +5,7 @@
   body {
     margin: 0;
     font-family: Arial;
+    background-color: #c9cfec;;
   }
   
   /* ----------------------   Loading Page CSS     ----------------------------------  */
@@ -23,6 +24,47 @@
     width:50vw;
     height:50vw;
     margin:0 25vw;
+}
+
+/* ------------------- NAvigation Bar------------------------------------------------------------- */
+
+.navbar-brand{
+  font-family: 'Inter', sans-serif;
+  font-weight: 800;
+  font-size:1rem;
+}
+
+.navbar-bg{
+  background-color: #8892BF;
+}
+
+.navbar-nav .nav-link {
+  color: rgba(0,0,0,.90);
+  font-weight: 700;
+  background-color:#c9cfec;
+  padding: 1rem;
+}
+
+.nav-link{
+  display:block;
+  text-decoration:none;
+  transition:color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out
+}
+@media (prefers-reduced-motion:reduce){
+  .nav-link{
+    transition:none
+  }
+}
+.nav-link:focus,.nav-link:hover{
+  background-color: #8892BF;
+}
+
+.navbar-bg .navbar-toggler{
+  color:rgba(0,0,0,.55);
+  border-color:rgba(0,0,0,.1)
+}
+.navbar-bg .navbar-toggler-icon{
+  background-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%280, 0, 0, 0.95%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
 }
 
 /* --------------------------------  Home Page CSS  -------------------------------- */
@@ -52,3 +94,131 @@
     vertical-align: middle;
     width: 100%;
   }
+
+
+  /* ------------------------ User Type Declaration ------------------------------- */
+  #user-type{
+    background-color: #c9cfec;
+    display: none;
+  }
+  .welcome{
+    position: relative;
+    background-color:#c9cfec;   
+    border-radius:5%;
+    text-align:center;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+  .welcome-img{
+    width:100%;
+    height:auto;
+    border-radius:5%;
+  }
+  .overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition: .5s ease;
+    background-color:rgba(136, 146, 191,0.5);
+    border-radius:5%;
+  }
+  .welcome:hover .overlay {
+    opacity: 1;
+  }  
+  .icon {
+    color: white;
+    font-size: 100px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
+  }
+  .fa-user:hover {
+    color: #209c;
+  }
+  .entry-text{
+    position: absolute;
+    bottom:8%;
+    left:35%;
+    font-size:150%;
+    font-weight:900;
+    color:#209c;
+  }
+  .entry-text:hover{
+    color:#eee;
+  }
+
+  /* --------------------- Log iN Form CSS --------------------------------------- */
+#sign-up{
+  display:none;
+  width:100%;
+  height:60vh;
+  font-size:125%;
+  font-weight: 800;
+  padding:5vh 3vw;
+  background-color: #ffffff;
+background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 200 200'%3E%3Cpolygon fill='%23c9cfec' points='100 0 0 100 100 100 100 200 200 100 200 0'/%3E%3C/svg%3E");
+}
+#log-in{
+  display:none;
+  width:100%;
+  height:60vh;
+  font-size:125%;
+  font-weight: 800;
+  padding:5vh 3vw;
+  background-color: #ffffff;
+background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 200 200'%3E%3Cpolygon fill='%23c9cfec' points='100 0 0 100 100 100 100 200 200 100 200 0'/%3E%3C/svg%3E");
+}
+#sign-up form,#log-in form{
+  width: 50%;
+  margin: 0 auto;
+  text-align:left;
+}
+#log-in-instead,#sign-up-instead{
+  display: inline-block;
+  padding:20px;
+}
+.w3-input{
+  padding:8px;
+  display:block;
+  border:none;
+  border-bottom:1px solid #470324;
+  width:100%;
+}
+.w3-input:focus{
+  border-color: #f784bc;
+  border-radius: 2px;
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem rgba(238, 9, 121, 0.25);
+  width:100%;
+}
+.submit{
+  color: #fff;
+  font-weight: 700;
+  background-color: #209c;
+  border-color: #209c;
+}
+.submit:hover{
+  color: #c9cfec;
+}
+
+/* ---------------------- Errors, Warnings & Success ------------- */
+.error{
+  display:none;
+  margin-top: 5px;
+}
+.warning{
+  margin-top: 5px;
+  display: none;
+}
+.success{
+  margin-top: 5px;
+  display:none;
+}
