@@ -521,3 +521,69 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
     width:80%;
     margin: 10px auto;
 }
+
+/* --------------------------------------Restaurant Profile Page Styling ---------------------------------- */
+.side {
+  -ms-flex: 30%; /* IE10 */
+  flex: 30%;
+  background-color: #f1f1f1;
+  padding: 20px;
+}
+  .restaurant-profile-row{
+    display: -ms-flexbox; /* IE10 */
+    display: flex;
+    -ms-flex-wrap: wrap; /* IE10 */
+    flex-wrap: wrap;
+}
+
+
+
+.main {   
+  -ms-flex: 70%; /* IE10 */
+  flex: 70%;
+  background-color: white;
+  padding: 20px;
+}
+
+.fakeimg {
+  background-color: #8892BF;
+  width: 100%;
+  padding: 12px;
+  border-radius: 1rem;
+  height:60px;
+  font-weight:600;
+  font-size:1.5rem;
+}
+
+.restaurant-profile-image{
+  padding: 0px;
+  height:200px;
+  font-size:2rem;
+}
+
+.restaurant-image{
+  width:100%;
+  height: 100%;
+  border-radius: 1rem ;
+  margin: 0px;
+}
+
+/* -------------------Settings gif styling - ------------- */
+.settings{
+  width:8vw;
+  height: 8vw;
+  position: fixed;
+  right:10px;
+  bottom: 10px;
+}
+/* -------------- -Add Button ------------------- */
+.add-item{
+  width:4vw;
+  height:4vw;
+  position: fixed;
+  right:110px;
+  bottom: 30px;
+  background-color: #c9cfec;
+  border-radius: 0.6rem;
+  border: 2px solid #8892BF;
+}

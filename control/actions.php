@@ -159,7 +159,7 @@ if($_GET["process"]=="profile-setup"){
         if($resultInfo && isset($_POST['name']) && isset($_FILES['restaurant_photos']['name'])){
             # Username
             $username = $_POST['name'];  
-            str_replace(" ","_",$username);     
+            // str_replace(" ","_",$username);     
             # Get file name
             $filename = $_FILES['restaurant_photos']['name'];
             # Get File size

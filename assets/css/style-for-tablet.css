@@ -13,3 +13,12 @@
       top:360px;
   }
 }
+
+@media screen and (max-width: 476px) {
+  .restaurant-profile-row {   
+    flex-direction: column;
+  }
+  .restaurant-profile-image{
+    height: 400px;
+  }
+}

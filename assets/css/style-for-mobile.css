@@ -25,4 +25,21 @@
         bottom: 10px;
     }
 
+    .add-item{
+      width:8vw;
+      height: 8vw;
+      position: fixed;
+      right:60px;
+      bottom: 20px;
+    }
+
+    .fakeimg {
+      font-weight: 400;
+    }
+    .restaurant-profile-image{
+      padding: 0px;
+      height:250px;
+      font-size:1rem;
+    }
 }
+
