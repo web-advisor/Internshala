@@ -10,8 +10,21 @@ include_once("control/data.php");
         <div class="side">
             <h2>About</h2>
             <h4>
-                <?php if (isset($name) && $name != "") echo $name;
+                <?php if (isset($name) && $name != "") echo $name; 
                 else echo ' Your Restaurant'; ?>
+                <?php
+                echo '<span style="padding-bottom:2px;">';
+                if(isset($rating)){
+                    if($rating=="vegetarian"){
+                        echo '<i class="fas fa-circle" id="veg"></i>';
+                    }else if($rating=="eggetarian"){
+                        echo '<i class="fas fa-circle" id="egg"></i>';
+                    }else if($rating=="non-vegetarian"){
+                        echo '<i class="fas fa-circle" id="non-veg"></i>';
+                    }
+                } 
+                echo '</span>';
+            ?>
             </h4>
             <div class="restaurant-profile-image fakeimg" style="height:200px; font-size:2rem;">
                 <?php if ((isset($name) && $name != "") && (isset($restaurant_photos) && $restaurant_photos != ""))
@@ -49,12 +62,16 @@ include_once("control/data.php");
                 else echo ' Address Line1,<br>City, State,<br> PIN'; ?> 
             </div>
         </div>
+
+        <!------------------------ Menu ITems  -------------------------->
         <div class="main">
             <h2 style="color:#209c">Your Menu</h2>
-            <?php
-                    
+            <?php 
+                display("public");
             ?>
-            <div class="fakeimg" style="height:200px;font-size:2rem;"><i class="far fa-images"></i> Your Menu</div>
+
+
+            <!-- <div class="fakeimg" style="height:200px;font-size:2rem;"><i class="far fa-images"></i> Your Menu</div>
 
             <p>Description</p>
             <br>
@@ -63,8 +80,11 @@ include_once("control/data.php");
             <h5>Title description, Sep 2, 2017</h5>
             <div class="fakeimg" style="height:200px;">Image</div>
             <p>Some text..</p>
-            <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+            <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p> -->
         </div>
+
+
+
     </div>
     <a href="index.php?page=edit-profile"><img src="assets/images/settings.gif" class="settings"></a>
     <a href="index.php?page=additem"><img src="assets/images/add-item.gif" class="add-item"></a>
@@ -93,5 +113,7 @@ include_once("control/data.php");
             <br>
         </div>
     </div>
+    <a href="index.php?page=edit-profile"><img src="assets/images/settings.gif" class="settings"></a>
+    <a href="index.php?page=additem"><img src="assets/images/add-item.gif" class="add-item"></a>
 
 <?php } ?>

@@ -19,6 +19,8 @@ if (isset($_GET["page"]) && $_GET["page"] == "menu") {
     include_once("views/restaurant/order.php");
 } else if (isset($_SESSION["id"]) && (isset($_GET["page"]) && $_GET["page"] == "additem") && (isset($_SESSION["type"]) && $_SESSION["type"] == "restaurant")) {
     include_once("views/restaurant/addMenuItem.php");
+} else if (isset($_GET["page"]) && $_GET["page"] == "wall") {
+    include_once("views/restaurant/profile.php");
 } else {
     include_once("views/home.php");
 }

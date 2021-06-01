@@ -39,6 +39,9 @@ function foodmarker(foodmark) {
 function ratingmarker(ratingmark) {
     document.getElementById("rating").value = ratingmark; 
 }
+function foodratingmarker(foodratingmark) {
+    document.getElementById("foodrating").value = foodratingmark; 
+}
 
 
 // ------------------------ Tooltip Function Call ---------------------- 

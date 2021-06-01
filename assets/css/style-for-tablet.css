@@ -12,13 +12,10 @@
   #address-div .submit-button{
       top:360px;
   }
+  .food-item-set-up{
+    padding: 1rem;
+    width: 70vw;
+    margin:0 auto;
+  }
 }
 
-@media screen and (max-width: 476px) {
-  .restaurant-profile-row {   
-    flex-direction: column;
-  }
-  .restaurant-profile-image{
-    height: 400px;
-  }
-}

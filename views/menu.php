@@ -1,1 +1,6 @@
-<p>Menu</p> 
+
+
+
+<?php 
+    display("public");
+?>

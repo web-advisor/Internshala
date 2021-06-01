@@ -426,11 +426,13 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
   margin-top: -22px;
   padding: 16px;
   color: white;
+  background-color: #209c;
   font-weight: bold;
   font-size: 18px;
   transition: 0.6s ease;
   border-radius: 0 3px 3px 0;
   user-select: none;
+  text-decoration: none;
 }
 
 .next {
@@ -440,6 +442,8 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
 
 .prev:hover, .next:hover {
   background-color: rgba(0,0,0,0.8);
+  color:#C9CFEC;
+  text-decoration: none;
 }
 
 .input-label{
@@ -553,6 +557,7 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
   height:60px;
   font-weight:600;
   font-size:1.5rem;
+  overflow: auto; 
 }
 
 .restaurant-profile-image{
@@ -586,4 +591,76 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
   background-color: #c9cfec;
   border-radius: 0.6rem;
   border: 2px solid #8892BF;
+}
+
+/* --------------- Add Menu Item Page ------------------- */
+.food-bg{
+  background-color: #209c;
+  color: white;
+  font-weight: 700;
+}
+.food-item-set-up{
+  padding: 1rem;
+  width: 50vw;
+  margin:1rem auto;
+  background-color: #6f54aa;
+background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 2 1'%3E%3Cdefs%3E%3ClinearGradient id='a' gradientUnits='userSpaceOnUse' x1='0' x2='0' y1='0' y2='1'%3E%3Cstop offset='0' stop-color='%236f54aa'/%3E%3Cstop offset='1' stop-color='%2388ffcb'/%3E%3C/linearGradient%3E%3ClinearGradient id='b' gradientUnits='userSpaceOnUse' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%23dcffe7' stop-opacity='0'/%3E%3Cstop offset='1' stop-color='%23dcffe7' stop-opacity='1'/%3E%3C/linearGradient%3E%3ClinearGradient id='c' gradientUnits='userSpaceOnUse' x1='0' y1='0' x2='2' y2='2'%3E%3Cstop offset='0' stop-color='%23dcffe7' stop-opacity='0'/%3E%3Cstop offset='1' stop-color='%23dcffe7' stop-opacity='1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect x='0' y='0' fill='url(%23a)' width='2' height='1'/%3E%3Cg fill-opacity='0.5'%3E%3Cpolygon fill='url(%23b)' points='0 1 0 0 2 0'/%3E%3Cpolygon fill='url(%23c)' points='2 1 2 0 0 0'/%3E%3C/g%3E%3C/svg%3E");
+background-attachment: fixed;
+background-size: cover;
+border-radius: 1rem;
+  box-shadow: 2px 2px 2px 2px #209c; 
+  position: relative;
+}
+.food-item-set-up label{
+  font-size: 120%;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-weight: 600;
+}
+.food-category-input-food-form{
+    padding:0.5rem;
+    padding-right: 1rem;
+    margin: 1rem;
+    width: max-content;
+}
+
+.shadow-textarea textarea.form-control::placeholder {
+  font-weight: 300;
+}
+.shadow-textarea textarea.form-control {
+  padding-left: 0.8rem;
+}
+
+/* ----------------Food Card Output  ---------------------- */
+.food-card-display{
+  background-color: #6f54aa;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 2 1'%3E%3Cdefs%3E%3ClinearGradient id='a' gradientUnits='userSpaceOnUse' x1='0' x2='0' y1='0' y2='1'%3E%3Cstop offset='0' stop-color='%236f54aa'/%3E%3Cstop offset='1' stop-color='%2388ffcb'/%3E%3C/linearGradient%3E%3ClinearGradient id='b' gradientUnits='userSpaceOnUse' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%23dcffe7' stop-opacity='0'/%3E%3Cstop offset='1' stop-color='%23dcffe7' stop-opacity='1'/%3E%3C/linearGradient%3E%3ClinearGradient id='c' gradientUnits='userSpaceOnUse' x1='0' y1='0' x2='2' y2='2'%3E%3Cstop offset='0' stop-color='%23dcffe7' stop-opacity='0'/%3E%3Cstop offset='1' stop-color='%23dcffe7' stop-opacity='1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect x='0' y='0' fill='url(%23a)' width='2' height='1'/%3E%3Cg fill-opacity='0.5'%3E%3Cpolygon fill='url(%23b)' points='0 1 0 0 2 0'/%3E%3Cpolygon fill='url(%23c)' points='2 1 2 0 0 0'/%3E%3C/g%3E%3C/svg%3E");
+  background-attachment: fixed;
+  background-size: cover;
+  border-radius: 1rem;
+  box-shadow: 2px 2px 2px 2px #209c; 
+  margin-top: 1rem;
+  padding: 1rem;
+}
+
+#delete-food-item{
+  position: absolute;
+  font: 1rem;
+  right:10px;
+  top:10px;
+}
+
+.food-card-display .settings{
+  width:3vw;
+  height:3vw;
+  position: relative;
+  /* right:5px; */
+  /* bottom: 3px; */
+}
+
+.card-deck{
+  margin-top:0.5rem;
+}
+.card{
+  background-color: #c9cfec;
+
 }

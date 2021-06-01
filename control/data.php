@@ -1,15 +1,51 @@
 <?php
 
+// ------------------------ Fetching Rstaurant Data ---------------------------------------------
+
+if (isset($_GET["page"]) && $_GET["page"] == "wall" && isset($_GET["rest_id"])) {
+    if (isset($_GET["rest_id"])) {
+        $rest_id = $_GET["rest_id"];
+        $sql = "SELECT `rest_details`.*,`rest_address`.*,`restaurant`.`email` FROM `rest_details`,`rest_address`,`restaurant`
+        WHERE `rest_details`.`rest_id`=" . mysqli_real_escape_string($link, $rest_id) . " AND `rest_address`.`rest_id`=" . mysqli_real_escape_string($link, $rest_id) . " AND `restaurant`.`id`=" . mysqli_real_escape_string($link, $rest_id) . "  LIMIT 1";
+        $result = mysqli_query($link, $sql);
+        if ($result && mysqli_num_rows($result) > 0) {
+            $row = mysqli_fetch_assoc($result);
+            $name ??= $row['name'];
+            $email ??= $row['email'];
+            $phone ??= $row['phone'];
+            $website ??= $row['website'];
+            $rating ??= $row['rating'];
+            $restaurant_photos ??= $row['image'];
+            $line ??= $row['line'];
+            $city ??= $row['city'];
+            $state ??= $row['state'];
+            $pin ??= $row['pin'];
+        } else {
+            $name = "";
+            $phone = "";
+            $line = "";
+            $city = "";
+            $state = "";
+            $country = "";
+            $pin = "";
+            $rating = "";
+            $website = "";
+            $restaurant_photos = "";
+        }
+    }
+}
+
+
 $count = 0;
 
 // --------------------- Fetching Data to display User Profile Data --------------------------------------------------
-if (isset($_SESSION["id"]) && isset($_SESSION["type"]) && ($_GET['page'] = "profile" || $_GET['page'] = "edit-profile")) {
+if (isset($_SESSION["id"]) && isset($_SESSION["type"]) && ($_GET['page'] = "profile" || $_GET['page'] = "edit-profile") ) {
 
     $type = $_SESSION["type"];
     $relation = substr($type, 0, 4) . "_";
 
     $sql = "SELECT *,`$type`.`email` FROM `" . $relation . "details`,$type
-    WHERE `" . $relation . "id`=" . mysqli_real_escape_string($link, $_SESSION['id']) . " AND `".$type."`.`id`=" . mysqli_real_escape_string($link, $_SESSION['id']) . "  LIMIT 1";
+    WHERE `" . $relation . "id`=" . mysqli_real_escape_string($link, $_SESSION['id']) . " AND `" . $type . "`.`id`=" . mysqli_real_escape_string($link, $_SESSION['id']) . "  LIMIT 1";
     $result = mysqli_query($link, $sql);
     if ($result && mysqli_num_rows($result) > 0) {
         $row = mysqli_fetch_assoc($result);
@@ -26,7 +62,7 @@ if (isset($_SESSION["id"]) && isset($_SESSION["type"]) && ($_GET['page'] = "prof
         if ($email == "email") {
             $email = "";
         }
-        
+
         $phone ??= $row['phone'];
         if ($phone == "phone") {
             $phone = "";
@@ -83,7 +119,7 @@ if (isset($_SESSION["id"]) && isset($_SESSION["type"]) && ($_GET['page'] = "prof
     }
 }
 
-if (isset($_SESSION["id"]) && isset($_SESSION["type"]) && ($_GET['page'] = "profile" || $_GET['page'] = "edit-profile")) {
+if (isset($_SESSION["id"]) && isset($_SESSION["type"]) && ($_GET['page'] = "profile" || $_GET['page'] = "edit-profile") ) {
 
     $type = $_SESSION["type"];
     $relation = substr($type, 0, 4) . "_";
@@ -149,3 +185,5 @@ if (isset($_SESSION["id"]) && isset($_SESSION["type"]) && ($_GET['page'] = "prof
         }
     }
 }
+
+

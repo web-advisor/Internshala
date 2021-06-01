@@ -121,7 +121,7 @@ if($_GET["process"]=="profile-setup"){
             $resultInfo=mysqli_query($link,$updatingInfo);
             echo "1"; 
         }else{
-            $insertingInfo="INSERT into `".$relation."details` (`".$relation."id`,`name`,`phone`,`preferences`) 
+            $insertingInfo="INSERT INTO `".$relation."details` (`".$relation."id`,`name`,`phone`,`preferences`) 
             VALUES ('".mysqli_real_escape_string($link,$_SESSION['id'])."',
                     '".mysqli_real_escape_string($link,$_POST['name'])."',
                     '".mysqli_real_escape_string($link,$_POST['phone'])."',
@@ -144,7 +144,7 @@ if($_GET["process"]=="profile-setup"){
             // $error.=mysqli_error($link);
             echo "1"; 
         }else{
-            $insertingInfo="INSERT into `".$relation."details` (`".$relation."id`,`name`,`phone`,`website`,`rating`,`image`) 
+            $insertingInfo="INSERT INTO `".$relation."details` (`".$relation."id`,`name`,`phone`,`website`,`rating`,`image`) 
             VALUES ('".mysqli_real_escape_string($link,$_SESSION['id'])."',
                     '".mysqli_real_escape_string($link,$_POST['name'])."',
                     '".mysqli_real_escape_string($link,$_POST['phone'])."',
@@ -159,12 +159,14 @@ if($_GET["process"]=="profile-setup"){
         if($resultInfo && isset($_POST['name']) && isset($_FILES['restaurant_photos']['name'])){
             # Username
             $username = $_POST['name'];  
-            // str_replace(" ","_",$username);     
             # Get file name
             $filename = $_FILES['restaurant_photos']['name'];
             # Get File size
             $filesize = $_FILES['restaurant_photos']['size'];
             # Location
+            trim($username);   
+            trim($filename);   
+
             $location = "../assets/images/restaurant/".$username;
             # create directory if not exists at location
             if(!is_dir($location)){
@@ -202,7 +204,7 @@ if($_GET["process"]=="profile-setup"){
             $resultLatLng=mysqli_query($link,$updatingLatLng);
             echo "1"; 
         }else{
-            $insertingLatLng="INSERT into `".$relation."address` (`".$relation."id`,`line`,`city`,`state`,`pin`,`lat`,`lng`) 
+            $insertingLatLng="INSERT INTO `".$relation."address` (`".$relation."id`,`line`,`city`,`state`,`pin`,`lat`,`lng`) 
             VALUES ('".mysqli_real_escape_string($link,$_SESSION['id'])."',
                     '".mysqli_real_escape_string($link,$_POST['line'])."',
                     '".mysqli_real_escape_string($link,$_POST['city'])."',
@@ -221,3 +223,98 @@ if($_GET["process"]=="profile-setup"){
         exit();
     }
 }
+
+// -------------------------Food Item Adding to the Database---------------------------------- 
+if($_GET["process"]=="food-item-add"){
+    // echo "<pre>";
+    // var_dump($_POST);
+    // echo "</pre>";
+    // echo "<pre>";
+    // var_dump($_FILES);
+    // echo "</pre>";
+
+    if(isset($_POST["status"])) $status=1; else $status=0;
+    $existCheck="SELECT `fname` FROM `food` WHERE `fname` = '".mysqli_real_escape_string($link,$_POST['food_name'])."' AND rest_id=".mysqli_real_escape_string($link,$_SESSION["id"])." LIMIT 1";
+        $resultEC=mysqli_query($link,$existCheck);
+        if($resultEC && mysqli_num_rows($resultEC)>0){
+            $updatingInfo="UPDATE `food`
+                SET `fname`='".mysqli_real_escape_string($link,$_POST['food_name'])."',
+                    `keywords`='".mysqli_real_escape_string($link,$_POST['food_keywords'])."',
+                    `category`='".mysqli_real_escape_string($link,$_POST['food_type'])."',
+                    `rating`='".mysqli_real_escape_string($link,$_POST['foodrating'])."',
+                    `description`='".mysqli_real_escape_string($link,$_POST['food_description'])."',
+                    `image`='".mysqli_real_escape_string($link,$_FILES['food_photo']['name'])."',
+                    `price`='".mysqli_real_escape_string($link,$_POST['food_price'])."',
+                    `status`='".mysqli_real_escape_string($link,$status)."'
+                WHERE `fname`='".mysqli_real_escape_string($link,$_POST['food_name'])."' AND rest_id=".mysqli_real_escape_string($link,$_SESSION["id"])." ";
+            $resultInfo=mysqli_query($link,$updatingInfo);
+            print_r(mysqli_error($link));
+            echo "1"; 
+        }else{
+            $insertingInfo="INSERT INTO `food` (`rest_id`,`fname`,`keywords`,`category`,`rating`,`description`,`image`,`price`,`status`) 
+            VALUES ('".mysqli_real_escape_string($link,$_SESSION["id"])."',
+                    '".mysqli_real_escape_string($link,$_POST['food_name'])."',
+                    '".mysqli_real_escape_string($link,$_POST['food_keywords'])."',
+                    '".mysqli_real_escape_string($link,$_POST['food_type'])."',
+                    '".mysqli_real_escape_string($link,$_POST['foodrating'])."',
+                    '".mysqli_real_escape_string($link,$_POST['food_description'])."',
+                    '".mysqli_real_escape_string($link,$_FILES['food_photo']['name'])."',
+                    '".mysqli_real_escape_string($link,$_POST['food_price'])."',
+                    '".mysqli_real_escape_string($link,$status)."')";
+            $resultInfo=mysqli_query($link,$insertingInfo);
+            print_r(mysqli_error($link));
+            echo "1";             
+        }
+        $rest="SELECT `name` FROM `rest_details` WHERE rest_id='".mysqli_real_escape_string($link,$_SESSION["id"])."' LIMIT 1";
+        $resultRest=mysqli_query($link,$rest);
+        print_r(mysqli_error($link));
+        
+        if($resultRest && mysqli_num_rows($resultRest)>0){
+            $rowRest=mysqli_fetch_assoc($resultRest);
+            // print_r($rowRest);
+            $restaurantName=$rowRest["name"];
+            if($resultInfo && isset($restaurantName) && isset($_POST['food_name']) && isset($_FILES['food_photo']['name'])){
+                # Foodname
+                $foodname = $_POST['food_name'];  
+                # Get file name
+                $filename = $_FILES['food_photo']['name'];
+                # Get File size
+                $filesize = $_FILES['food_photo']['size'];
+                # Location
+                trim($foodname);   
+                trim($restaurantName);   
+                trim($filename);   
+                
+                $location = "../assets/images/restaurant/".$restaurantName."/".$foodname;
+                # create directory if not exists at location
+                if(!is_dir($location)){
+                  mkdir($location, 0755);
+                }       
+                $location .= "/".$filename;      
+                # Upload file
+                if(move_uploaded_file($_FILES['food_photo']['tmp_name'],$location)){
+                    echo "1";
+                }
+             }
+        }        
+}
+
+// if($_GET['process']="delete-food-item"){
+//     if(isset($_POST["food_id"])) {
+//         $food_id=$_POST["food_id"];
+//         $query="DELETE FROM `food` WHERE `id`=".mysqli_real_escape_string($link,$food_id);
+//         $result=mysqli_query($link,$query);
+//         if($result){
+//             echo 1;
+//         }else{
+//             $error="Cannot Process Request. Make Sure Dish is not pending in Order section !";
+//         }
+//     } else {
+//         $error="Unable to Process Request. Please try again later.";
+//     }
+
+//     if($error!=""){
+//         echo $error;
+//         exit();
+//     }
+// }
