@@ -71,7 +71,8 @@
                     <?php if (isset($_SESSION["id"])) { ?>
                         <li class="nav-item">
                             <?php if (isset($_SESSION["type"]) && $_SESSION["type"] == "customers") echo '<a class="nav-link" href="?page=cart">Cart</a>';
-                            else if (isset($_SESSION["type"]) && $_SESSION["type"] == "restaurant") echo '<a class="nav-link" href="?page=order">Order</a>'; ?>
+                            else if (isset($_SESSION["type"]) && $_SESSION["type"] == "restaurant") {
+                                echo '<a class="nav-link position-relative" href="?page=order"><i class="fas fa-circle notify"></i>Order</a>';} ?>
                         </li>
                     <?php } ?>
                     <?php if (isset($_SESSION["id"])) { ?>
@@ -85,7 +86,7 @@
                         <button type="button" id="log-out-button" class="btn btn-md btn-pill btn-default" style="cursor:pointer;"><a href="?process=logout" style="text-decoration:none; font-weight:bolder; color:#fff;">Logout</a></button>
                     <?php } else {   ?>
                         <li class="nav-item" id="sign-up-button">
-                            <a class="nav-link" href="#">Sign Up</a>
+                            <a class="nav-link" href="#">Sign Up/Log In</a>
                         </li>
                     <?php  }  ?>
 

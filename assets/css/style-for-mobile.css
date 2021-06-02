@@ -56,6 +56,13 @@
     width: 90vw;
     margin:0 auto;
   }
+  .notify{
+    position: absolute;
+    top:-4px;
+    left:92px;
+    color: orangered;
+    display: none;
+  }
   
 }
 

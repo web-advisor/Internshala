@@ -4,7 +4,6 @@
 include_once("control/data.php");
 ?>
 
-<?php if (isset($progress) && $progress >= 50) {        ?>
 
     <div class="restaurant-profile-row">
         <div class="side">
@@ -65,55 +64,16 @@ include_once("control/data.php");
 
         <!------------------------ Menu ITems  -------------------------->
         <div class="main">
-            <h2 style="color:#209c">Your Menu</h2>
+            <h2 style="color:#209c"><?php if(isset($_SESSION["type"]) && $_SESSION["type"]=="restaurant"){ ?>Your<?php } ?> Menu</h2>
             <?php 
                 display("public");
             ?>
-
-
-            <!-- <div class="fakeimg" style="height:200px;font-size:2rem;"><i class="far fa-images"></i> Your Menu</div>
-
-            <p>Description</p>
-            <br>
-
-            <h2>TITLE HEADING</h2>
-            <h5>Title description, Sep 2, 2017</h5>
-            <div class="fakeimg" style="height:200px;">Image</div>
-            <p>Some text..</p>
-            <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p> -->
         </div>
 
 
 
     </div>
+    <?php if(isset($_SESSION["type"]) && $_SESSION["type"]=="restaurant"){ ?>
     <a href="index.php?page=edit-profile"><img src="assets/images/settings.gif" class="settings"></a>
     <a href="index.php?page=additem"><img src="assets/images/add-item.gif" class="add-item"></a>
-
-<?php } else {    ?>
-
-    <div class="img-row">
-        <div class="side">
-            <h2>About</h2>
-            <h4>Your Restauarant</h4>
-            <div class="fakeimg" style="height:200px; font-size:2rem;">
-                <i class="far fa-images"></i> Your Restauarant
-            </div>
-            <p>Order hot and tasty food !</p>
-            <h3>Reach Out</h3>
-            <div class="fakeimg" style="height:60px;font-size:1.5rem;"><i class="fas fa-phone-volume"></i> Phone </div><br>
-            <div class="fakeimg" style="height:60px;font-size:1.5rem;"><i class="fab fa-internet-explorer"></i> Website</div><br>
-            <div class="fakeimg" style="height:60px;font-size:1.5rem;"><i class="fas fa-envelope-square"></i> Email</div><br>
-            <div class="fakeimg" style="height:120px;font-size:1.5rem;"><i class="fas fa-map-marked"></i> Address</div>
-        </div>
-        <div class="main">
-            <h2>Your Menu</h2>
-            <div class="fakeimg" style="height:200px;font-size:2rem;"><i class="far fa-images"></i> Your Menu</div>
-
-            <p>Description</p>
-            <br>
-        </div>
-    </div>
-    <a href="index.php?page=edit-profile"><img src="assets/images/settings.gif" class="settings"></a>
-    <a href="index.php?page=additem"><img src="assets/images/add-item.gif" class="add-item"></a>
-
-<?php } ?>
+    <?php } ?>

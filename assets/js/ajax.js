@@ -94,6 +94,8 @@ $("#log-in-submit").click(function () {
                 if ($type == "customers") {
                     window.location.assign("index.php?page=menu");
                 } else if ($type == "restaurant") {
+                    $(".notify").show();
+
                     window.location.assign("index.php?page=profile");
                 }
             } else {
@@ -113,7 +115,7 @@ $("#customers-profile-submit").click(function () {
         success: function (result) {
             //    alert(result);
             if (result == "11") {
-                window.location.assign("index.php?page=profile");
+                window.location.assign("index.php?page=menu");
             } else {
                 $(".customers-profile-set-up .error").html(result).show();
             }
@@ -173,10 +175,28 @@ $("form#food-item-add").submit(function(e) {
 });
 
 $("#delete-food-item").click(function () {
+    alert($(this).val());
     $.ajax({
         type: "POST",
         url: "control/actions.php?process=delete-food-item",
-        data: "food_id=" + $("#delete-food-item input").val(),
+        data: "food_id=" + $(this).val(),
+        success: function (result) {
+            //    alert(result);
+            if (result == 1) {
+                window.location.assign("index.php?page=profile");
+            } else {
+                alert(result);
+            }
+        }
+    })
+});
+
+$("#restaurant-ready").click(function () {
+    alert($(this).val());
+    $.ajax({
+        type: "POST",
+        url: "control/actions.php?process=updatereceived",
+        data: "food_id=" + $(this).val(),
         success: function (result) {
             //    alert(result);
             if (result == 1) {

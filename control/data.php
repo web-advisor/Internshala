@@ -1,6 +1,34 @@
 <?php
-
 // ------------------------ Fetching Rstaurant Data ---------------------------------------------
+if (array_key_exists("page",$_GET) && array_key_exists("food_id",$_GET)) {
+    $food_id = $_GET["food_id"];
+    
+    $sql = "SELECT * FROM `food` WHERE id='" . mysqli_real_escape_string($link, $food_id) . "' LIMIT 1";
+    $result = mysqli_query($link, $sql);
+    if ($result && mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result);
+        $food_name ??= $row['fname'];
+        $food_type ??= $row['category'];
+        $foodrating ??= $row['rating'];
+        $food_keywords??= $row['keywords'];
+        $food_description ??= $row['description'];
+        $food_photo ??= $row['image'];
+        $food_price ??= $row['price'];
+        $status ??= $row['status'];
+    }else{
+        echo mysqli_error($link);
+        $food_name="";
+        $food_type="";
+        $food_keywords="";
+        $foodraitng="";
+        $food_description="";
+        $food_photo="";
+        $food_price="";
+        $status="";
+    }
+}
+
+
 
 if (isset($_GET["page"]) && $_GET["page"] == "wall" && isset($_GET["rest_id"])) {
     if (isset($_GET["rest_id"])) {
@@ -39,7 +67,7 @@ if (isset($_GET["page"]) && $_GET["page"] == "wall" && isset($_GET["rest_id"])) 
 $count = 0;
 
 // --------------------- Fetching Data to display User Profile Data --------------------------------------------------
-if (isset($_SESSION["id"]) && isset($_SESSION["type"]) && ($_GET['page'] = "profile" || $_GET['page'] = "edit-profile") ) {
+if (isset($_SESSION["id"]) && isset($_SESSION["type"]) && ($_GET['page'] = "profile" || $_GET['page'] = "edit-profile")) {
 
     $type = $_SESSION["type"];
     $relation = substr($type, 0, 4) . "_";
@@ -119,7 +147,7 @@ if (isset($_SESSION["id"]) && isset($_SESSION["type"]) && ($_GET['page'] = "prof
     }
 }
 
-if (isset($_SESSION["id"]) && isset($_SESSION["type"]) && ($_GET['page'] = "profile" || $_GET['page'] = "edit-profile") ) {
+if (isset($_SESSION["id"]) && isset($_SESSION["type"]) && ($_GET['page'] = "profile" || $_GET['page'] = "edit-profile")) {
 
     $type = $_SESSION["type"];
     $relation = substr($type, 0, 4) . "_";

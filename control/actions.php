@@ -299,22 +299,4 @@ if($_GET["process"]=="food-item-add"){
         }        
 }
 
-// if($_GET['process']="delete-food-item"){
-//     if(isset($_POST["food_id"])) {
-//         $food_id=$_POST["food_id"];
-//         $query="DELETE FROM `food` WHERE `id`=".mysqli_real_escape_string($link,$food_id);
-//         $result=mysqli_query($link,$query);
-//         if($result){
-//             echo 1;
-//         }else{
-//             $error="Cannot Process Request. Make Sure Dish is not pending in Order section !";
-//         }
-//     } else {
-//         $error="Unable to Process Request. Please try again later.";
-//     }
-
-//     if($error!=""){
-//         echo $error;
-//         exit();
-//     }
-// }
+    

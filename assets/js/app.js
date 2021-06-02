@@ -48,7 +48,7 @@ function foodratingmarker(foodratingmark) {
 $(function () {
     $('[data-toggle="tooltip"]').tooltip();
 })
-
+    
 
 //  ------------------------------------------ SlideShow --------------------------
 var slideIndex = 1;

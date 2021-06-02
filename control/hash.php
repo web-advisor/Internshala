@@ -1,8 +1,8 @@
 <?php
     // Local Devlopment Credentials :
         // $host="localhost";
-        // $userName="amar";
-        // $password="webadvisor@0401";
+        // $userName="";
+        // $password="";
         // $dbName="foodshala";  
 
 # Production Credentials : 

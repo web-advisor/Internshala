@@ -66,7 +66,7 @@ include_once("control/data.php");
         </div>
         <div class="custom-control custom-checkbox">
             <input type="checkbox" class="custom-control-input" id="status" name="status">
-            <label class="custom-control-label" for="status" data-bs-toggle="tooltip" data-bs-placement="top" title="Chef Special Dishes gets featured on our Web App Wall !">Declare this Dish Chef Special ?</label>
+            <label class="custom-control-label" for="status"  data-bs-toggle="tooltip" data-bs-placement="top" title="Chef Special Dishes gets featured on our Web App Wall !" >Declare this Dish Chef Special ?</label>
         </div>
         <button type="submit" class="btn btn-lg btn-block food-bg" id="food_data_submit">Submit</button>
     </form>

@@ -667,7 +667,7 @@ border-radius: 1rem;
 }
 
 .card-deck{
-  margin-top:0.5rem;
+  margin-top:1rem;
 }
 .card{
   background-color: #c9cfec;
@@ -690,3 +690,44 @@ background-size: cover;
   margin:auto auto;
  
 }
+.cart{
+  width:100%;
+}
+
+.cart img{
+    width:20vw;
+    height:20vw;
+    margin:0 40vw;
+}
+
+#cart-view{
+  width: 200px;
+  height: 200px;
+  border-radius: 12px;
+  box-shadow: 2px 2px 2px 2px #209c;
+}
+
+.cart-item{
+  border: 3px solid #fff;
+  box-shadow: 2px 2px 2px 2px #000;
+  padding: 4px;
+  border-radius: 40px;
+  margin-top: 1rem;
+}
+.order-item{
+    border: 3px solid #fff;
+    box-shadow: 2px 2px 2px 2px #000;
+    padding: 4px;
+    border-radius: 40px;
+    /* height:max-content; */
+    margin-top: 1rem;
+}
+
+.notify{
+  position: absolute;
+  top:-4px;
+  right:-2px;
+  color: orangered;
+  display: none;
+}
+
