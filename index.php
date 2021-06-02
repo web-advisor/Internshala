@@ -16,7 +16,7 @@ if (isset($_GET["page"]) && $_GET["page"] == "menu") {
 } else if (isset($_SESSION["id"]) && (isset($_GET["page"]) && $_GET["page"] == "cart") && (isset($_SESSION["type"]) && $_SESSION["type"] == "customers")) {
     include_once("views/customer/cart.php");
 } else if (isset($_SESSION["id"]) && (isset($_GET["page"]) && $_GET["page"] == "order") && (isset($_SESSION["type"]) && $_SESSION["type"] == "restaurant")) {
-    include_once("views/restaurant/order.php");
+    include_once("views/restaurant/orders.php");
 } else if (isset($_SESSION["id"]) && (isset($_GET["page"]) && $_GET["page"] == "additem") && (isset($_SESSION["type"]) && $_SESSION["type"] == "restaurant")) {
     include_once("views/restaurant/addMenuItem.php");
 } else if (isset($_GET["page"]) && $_GET["page"] == "wall") {

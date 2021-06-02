@@ -48,12 +48,15 @@ function displayFoodCards($type, $rating)
             } else if ($rating == "non-vegetarian") {
                 echo '<p class="h3 text-danger">Non-Vegetarian</p>';
             }
-            if ($num_row % 3 == 0) {
+            if ($num_row % 3 == 0 || $num_row > 4) {
                 $j = 0;
                 while ($j < $num_row / 3) {
                     echo '
                         <div class="card-deck">';
                     for ($i = 0; $i < 3; $i++) {
+                        if(($j * 3 + $i)>=$num_row){
+                            break;
+                        }
                         echo '<div class="card col-md-4">';
                         $food = "SELECT `rest_id`,`name` FROM `rest_details` WHERE `rest_id`='" . mysqli_real_escape_string($link, $row[$j * 3 + $i][1]) . "' LIMIT 1";
                         $foodresult = mysqli_query($link, $food);
@@ -149,9 +152,9 @@ function displayFoodCards($type, $rating)
                     echo '
                         <div class="card-deck">';
                     for ($i = 0; $i < 1; $i++) {
-                        echo '<div class="card col-md-12">';
+                        echo '<div class="card col-md-6 mx-auto">';
 
-                        $food = "SELECT `rest_id`,`name` FROM `rest_details` WHERE `rest_id`='" . mysqli_real_escape_string($link, $row[$j * 2 + $i][1]) . "' LIMIT 1";
+                        $food = "SELECT `rest_id`,`name` FROM `rest_details` WHERE `rest_id`='" . mysqli_real_escape_string($link, $row[$j + $i][1]) . "' LIMIT 1";
                         $foodresult = mysqli_query($link, $food);
                         if ($foodresult && mysqli_num_rows($foodresult) > 0) {
                             $foodrow = mysqli_fetch_assoc($foodresult);
@@ -163,7 +166,7 @@ function displayFoodCards($type, $rating)
                                         <a href="#" style="color:#209c;text-decoration:none;"><i class="fas fa-minus-circle" id="delete-food-item"><input type="hidden" value="' . $row[$j + $i][0] . '"></i></a> 
                                     </div>';
                             }
-                            echo '<img class="card-img-top" height="500px" src="assets/images/restaurant/' . $foodrestaurant . '/' . $row[$j + $i][2] . '/' . $row[$j + $i][7] . '" alt="' . $row[$j + $i][2] . '">
+                            echo '<img class="card-img-top" height="300px" src="assets/images/restaurant/' . $foodrestaurant . '/' . $row[$j + $i][2] . '/' . $row[$j + $i][7] . '" alt="' . $row[$j + $i][2] . '">
                                     <div class="card-body">
                                         <h5 class="card-title">' . $row[$j + $i][2] . '</h5>
                                         <p class="card-text">' . $row[$j + $i][6] . '</p>
@@ -205,6 +208,58 @@ function displayRestaurants($lat, $lng)
 {
     global $link;
 }
+
+function displayHome()
+{
+    global $link;
+    $sql = "SELECT * FROM `food` WHERE `status`='" . mysqli_real_escape_string($link, 1) . "' LIMIT 24";
+    $result = mysqli_query($link, $sql);
+    if ($result && mysqli_num_rows($result) > 0) {
+        $num_rows = mysqli_num_rows($result);
+        $row = mysqli_fetch_all($result);
+        if ($num_rows == 24) {
+            echo '<div class="img-row">';
+            $j = 0;
+            while ($j < $num_rows) {
+                echo '<div class="column">';
+                for ($i = 0; $i < $num_rows / 4; $i++) {
+                    $food = "SELECT `rest_id`,`name` FROM `rest_details` WHERE `rest_id`='" . mysqli_real_escape_string($link, $row[$j * ($num_rows / 6)  + $i][1]) . "' LIMIT 1";
+                    $foodresult = mysqli_query($link, $food);
+                    if ($foodresult && mysqli_num_rows($foodresult) > 0) {
+                        $foodrow = mysqli_fetch_assoc($foodresult);
+                        $foodrestaurant = $foodrow['name'];
+                        // $foodrestaurantid = $foodrow['rest_id'];
+                        echo '<img src=src="assets/images/restaurant/' . $foodrestaurant . '/' . $row[$j * ($num_rows / 6) + $i][2] . '/' . $row[$j * ($num_rows / 6)  + $i][7] . '" alt="' . $row[$j * ($num_rows / 6)  + $i][2] . '"  style="width:100%">';
+                    }
+                }
+                $j++;
+                if ($j == 6) {
+                    echo '</div>';
+                }
+            }
+            echo '</div>';
+        } else {
+
+            // -----------------  Less than 24 Results -----------------
+            echo '<div class="alternate-reality">
+            <div class="heading">
+    Welcome to <br>
+    <span style="color:#209c;">FOOD</span><span style="color:grey;">shala
+
+</div></div>';
+        }
+    } else {
+        // -----------------  No  Results -----------------
+        echo '<div class="alternate-reality">
+        <div class="heading">
+                Welcome to <br>
+        <span style="color:#209c;">FOOD</span><span style="color:grey;">shala
+        </div>
+    </div>';
+    }
+}
+
+
 
 function display($type)
 {

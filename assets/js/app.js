@@ -49,6 +49,7 @@ $(function () {
     $('[data-toggle="tooltip"]').tooltip();
 })
 
+
 //  ------------------------------------------ SlideShow --------------------------
 var slideIndex = 1;
 showSlides(slideIndex);
